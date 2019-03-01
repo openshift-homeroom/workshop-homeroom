@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" crossorigin="anonymous">
+
+    <title>OpenShift Workshops</title>
+  </head>
+  <body>
+
+    <style>
+      body > .container {
+	padding-top: 20px;
+      }
+    </style>
+
+    <nav class="navbar navbar-fixed-top navbar-light bg-light">
+      <a class="navbar-brand" href="#">
+        OpenShift Workshops
+      </a>
+    </nav>
+
+    <div class="container">
+      {% for row in workshops | batch(3) %}
+        <div class="row justify-content-center">
+          <div class="card-deck">
+            {% for workshop in row %}
+              <div class="card mb-4">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ workshop.title }}</h5>
+                    <p class="card-text">{{ workshop.description }}</p>
+                    <a href="{{ workshop.url }}" class="btn btn-primary mt-auto">Start workshop</a>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}" crossorigin="anonymous"></script>
+  </body>
+</html>
