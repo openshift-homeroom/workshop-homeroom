@@ -191,6 +191,9 @@
             "apiVersion": "v1",
             "metadata": {
                 "name": "${APPLICATION_NAME}",
+                "annotations": {
+                    "kubernetes.io/tls-acme": "true"
+                },
                 "labels": {
                     "app": "${APPLICATION_NAME}"
                 }
@@ -204,6 +207,10 @@
                 },
                 "port": {
                     "targetPort": "8080-tcp"
+                },
+                "tls": {
+                    "termination": "edge",
+                    "insecureEdgeTerminationPolicy": "Redirect"
                 }
             }
         }
