@@ -162,6 +162,9 @@
             "apiVersion": "v1",
             "metadata": {
                 "name": "${APPLICATION_NAME}",
+                "annotations": {
+                    "kubernetes.io/tls-acme": "true"
+                },
                 "labels": {
                     "app": "${APPLICATION_NAME}"
                 }
