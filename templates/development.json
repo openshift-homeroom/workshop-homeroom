@@ -17,6 +17,15 @@
             "name": "WORKSHOPS_LIST",
             "value": "[]",
             "required": true
+        },
+        {
+            "name": "HOMEROOM_HOST",
+            "value": ""
+        },
+        {
+            "name": "LETS_ENCRYPT",
+            "value": "false",
+            "required": true
         }
     ],
     "objects": [
@@ -192,14 +201,14 @@
             "metadata": {
                 "name": "${APPLICATION_NAME}",
                 "annotations": {
-                    "kubernetes.io/tls-acme": "true"
+                    "kubernetes.io/tls-acme": "${LETS_ENCRYPT}"
                 },
                 "labels": {
                     "app": "${APPLICATION_NAME}"
                 }
             },
             "spec": {
-                "host": "",
+                "host": "${HOMEROOM_HOST}",
                 "to": {
                     "kind": "Service",
                     "name": "${APPLICATION_NAME}",
