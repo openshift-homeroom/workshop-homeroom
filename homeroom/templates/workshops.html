@@ -33,7 +33,7 @@
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title">{{ workshop.title }}</h5>
                     <p class="card-text">{{ workshop.description }}</p>
-                    <a href="{{ workshop.url }}" class="btn btn-primary mt-auto">Start workshop</a>
+                    <a href="{{ workshop.url }}" class="btn btn-primary mt-auto start-workshop">Start workshop</a>
                 </div>
               </div>
             {% endfor %}
@@ -45,5 +45,15 @@
     <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}" crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='js/popper.min.js') }}" crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}" crossorigin="anonymous"></script>
+
+    <script>
+        $(window).on('load', function() {
+            $(".start-workshop").on("click", function() {
+                $(this).addClass("btn-success");
+                $(this).removeClass("btn-primary");
+                $(".start-workshop").addClass("disabled");
+            });
+        });
+    </script>
   </body>
 </html>
