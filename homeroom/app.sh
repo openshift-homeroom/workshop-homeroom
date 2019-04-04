@@ -10,6 +10,7 @@ ARGS="$ARGS --log-to-terminal"
 ARGS="$ARGS --port $PORT"
 ARGS="$ARGS --document-root htdocs"
 ARGS="$ARGS --callable-object app"
+ARGS="$ARGS --access-log"
 
 if [ x"$MOD_WSGI_PROCESSES" != x"" ]; then
     ARGS="$ARGS --processes $MOD_WSGI_PROCESSES"
