@@ -15,7 +15,7 @@
         },
         {
             "name": "HOMEROOM_IMAGE",
-            "value": "quay.io/openshiftlabs/workshop-homeroom:1.3.0",
+            "value": "quay.io/openshiftlabs/workshop-homeroom:1.4.0",
             "required": true
         },
         {
@@ -26,6 +26,14 @@
         {
             "name": "HOMEROOM_HOST",
             "value": ""
+        },
+        {
+            "name": "HOMEROOM_TITLE",
+            "value": "Workshops"
+        },
+        {
+            "name": "HOMEROOM_BRANDING",
+            "value": "openshift"
         },
         {
             "name": "LETS_ENCRYPT",
@@ -120,6 +128,16 @@
                                         "containerPort": 8080,
                                         "protocol": "TCP"
                                     }
+                                ],
+                                "env": [
+									{
+										"name": "HOMEROOM_TITLE",
+										"value": "${HOMEROOM_TITLE}"
+									},
+									{
+										"name": "HOMEROOM_BRANDING",
+										"value": "${HOMEROOM_BRANDING}"
+									}
                                 ],
                                 "volumeMounts": [
                                     {

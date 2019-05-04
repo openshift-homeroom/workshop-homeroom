@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" crossorigin="anonymous">
 
-    <title>OpenShift Workshops</title>
+    <title>{{ title }}</title>
   </head>
   <body>
 
@@ -18,10 +18,9 @@
       }
     </style>
 
-    <nav class="navbar navbar-fixed-top navbar-light bg-light">
-      <a class="navbar-brand" href="#">
-        OpenShift Workshops
-      </a>
+    <nav class="navbar navbar-fixed-top navbar-light bg-dark">
+      <img src="static/img/{{ banner_image }}"></img>
+      <div class="text-white"><div>{{ title }}</div></div>
     </nav>
 
     <div class="container">
