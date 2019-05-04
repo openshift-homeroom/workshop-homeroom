@@ -24,6 +24,17 @@ if not workshops:
 
 print('WORKSHOPS', workshops)
 
+banner_images = {
+    'openshift': 'openshift-logo.svg',
+    'dedicated': 'openshift-dedicated-logo.svg',
+    'okd': 'ok-logo.svg',
+} 
+
 @app.route('/')
 def index():
-    return render_template('workshops.html', workshops=workshops)
+    title = os.environ.get('HOMEROOM_TITLE', 'Workshops')
+    branding = os.environ.get('HOMEROOM_BRANDING', 'openshift')
+    banner_image = banner_images.get(branding, banner_images['openshift'])
+
+    return render_template('workshops.html', title=title,
+            banner_image=banner_image, workshops=workshops)

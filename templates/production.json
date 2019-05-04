@@ -28,6 +28,14 @@
             "value": ""
         },
         {
+            "name": "HOMEROOM_TITLE",
+            "value": "Workshops"
+        },
+        {
+            "name": "HOMEROOM_BRANDING",
+            "value": "openshift"
+        },
+        {
             "name": "LETS_ENCRYPT",
             "value": "false",
             "required": true
@@ -120,6 +128,16 @@
                                         "containerPort": 8080,
                                         "protocol": "TCP"
                                     }
+                                ],
+                                "env": [
+									{
+										"name": "HOMEROOM_TITLE",
+										"value": "${HOMEROOM_TITLE}"
+									},
+									{
+										"name": "HOMEROOM_BRANDING",
+										"value": "${HOMEROOM_BRANDING}"
+									}
                                 ],
                                 "volumeMounts": [
                                     {
