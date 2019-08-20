@@ -86,7 +86,7 @@
                 "source": {
                     "type": "Git",
                     "git": {
-                        "uri": "https://github.com/openshift-labs/workshop-homeroom.git",
+                        "uri": "https://github.com/openshift-homeroom/workshop-homeroom.git",
                         "ref": "develop"
                     },
                     "contextDir": "homeroom"
@@ -159,14 +159,14 @@
                                     }
                                 ],
                                 "env": [
-									{
-										"name": "HOMEROOM_TITLE",
-										"value": "${HOMEROOM_TITLE}"
-									},
-									{
-										"name": "HOMEROOM_BRANDING",
-										"value": "${HOMEROOM_BRANDING}"
-									}
+                                    {
+                                            "name": "HOMEROOM_TITLE",
+                                            "value": "${HOMEROOM_TITLE}"
+                                    },
+                                    {
+                                            "name": "HOMEROOM_BRANDING",
+                                            "value": "${HOMEROOM_BRANDING}"
+                                    }
                                 ],
                                 "volumeMounts": [
                                     {
@@ -184,7 +184,7 @@
                                     "defaultMode": 420
                                 }
                             }
-			]
+                        ]
                     }
                 }
             }

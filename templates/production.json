@@ -130,14 +130,14 @@
                                     }
                                 ],
                                 "env": [
-									{
-										"name": "HOMEROOM_TITLE",
-										"value": "${HOMEROOM_TITLE}"
-									},
-									{
-										"name": "HOMEROOM_BRANDING",
-										"value": "${HOMEROOM_BRANDING}"
-									}
+                                    {
+                                            "name": "HOMEROOM_TITLE",
+                                            "value": "${HOMEROOM_TITLE}"
+                                    },
+                                    {
+                                            "name": "HOMEROOM_BRANDING",
+                                            "value": "${HOMEROOM_BRANDING}"
+                                    }
                                 ],
                                 "volumeMounts": [
                                     {
@@ -155,7 +155,7 @@
                                     "defaultMode": 420
                                 }
                             }
-			]
+                        ]
                     }
                 }
             }

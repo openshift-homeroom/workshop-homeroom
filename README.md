@@ -28,7 +28,7 @@ Create a file ``workshops.json``, which contains a list, in JSON format, of the 
 Then run:
 
 ```
-oc new-app https://raw.githubusercontent.com/openshift-labs/workshop-homeroom/master/templates/production.json \
+oc new-app https://raw.githubusercontent.com/openshift-homeroom/workshop-homeroom/master/templates/production.json \
   --param WORKSHOPS_LIST="`cat workshops.json`"
 ```
 
