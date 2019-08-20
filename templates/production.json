@@ -15,7 +15,7 @@
         },
         {
             "name": "HOMEROOM_IMAGE",
-            "value": "quay.io/openshiftlabs/workshop-homeroom:1.4.0",
+            "value": "quay.io/openshifthomeroom/workshop-homeroom:2.0.0",
             "required": true
         },
         {
