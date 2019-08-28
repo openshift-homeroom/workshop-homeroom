@@ -27,7 +27,7 @@ print('WORKSHOPS', workshops)
 banner_images = {
     'openshift': 'openshift-logo.svg',
     'dedicated': 'openshift-dedicated-logo.svg',
-    'okd': 'ok-logo.svg',
+    'okd': 'okd-logo.svg',
 } 
 
 @app.route('/')
