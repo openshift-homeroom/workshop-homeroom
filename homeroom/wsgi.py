@@ -25,7 +25,7 @@ if not workshops:
 print('WORKSHOPS', workshops)
 
 banner_images = {
-    'homeroom': 'homeroom-logo.svg',
+    'homeroom': 'homeroom-logo.png',
     'openshift': 'openshift-logo.svg',
     'dedicated': 'openshift-dedicated-logo.svg',
     'okd': 'okd-logo.svg',
