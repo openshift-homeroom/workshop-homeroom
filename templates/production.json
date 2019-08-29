@@ -33,7 +33,7 @@
         },
         {
             "name": "HOMEROOM_BRANDING",
-            "value": "openshift"
+            "value": "homeroom"
         },
         {
             "name": "LETS_ENCRYPT",
