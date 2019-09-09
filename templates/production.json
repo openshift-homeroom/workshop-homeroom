@@ -43,6 +43,35 @@
     ],
     "objects": [
         {
+            "kind": "ServiceAccount",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "${APPLICATION_NAME}-user",
+                "labels": {
+                    "app": "${APPLICATION_NAME}"
+                }
+            }
+        },
+        {
+            "kind": "RoleBinding",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "${APPLICATION_NAME}-view",
+                "labels": {
+                    "app": "${APPLICATION_NAME}"
+                }
+            },
+            "subjects": [
+                {
+                    "kind": "ServiceAccount",
+                    "name": "${APPLICATION_NAME}-user"
+                }
+            ],
+            "roleRef": {
+                "name": "view"
+            }
+        },
+        {
             "kind": "ConfigMap",
             "apiVersion": "v1",
             "metadata": {
@@ -120,6 +149,7 @@
                         }
                     },
                     "spec": {
+                        "serviceAccountName", "${APPLICATION_NAME}-user",
                         "containers": [
                             {
                                 "name": "homeroom",
