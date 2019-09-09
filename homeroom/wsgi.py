@@ -78,9 +78,8 @@ def monitor_workshops():
 
                         url = '%s://%s' % (scheme, route.spec.host)
 
-                        if name and url:
-                            active_workshops.append(dict(title=title,
-                                    description=description, url=url))
+                        active_workshops.append(dict(title=title,
+                                description=description, url=url))
 
             if workshops != active_workshops:
                 workshops[:] = active_workshops
