@@ -20,8 +20,7 @@
         },
         {
             "name": "WORKSHOPS_LIST",
-            "value": "[]",
-            "required": true
+            "value": "[]"
         },
         {
             "name": "HOMEROOM_HOST",
@@ -149,7 +148,7 @@
                         }
                     },
                     "spec": {
-                        "serviceAccountName", "${APPLICATION_NAME}-user",
+                        "serviceAccountName": "${APPLICATION_NAME}-user",
                         "containers": [
                             {
                                 "name": "homeroom",
@@ -160,6 +159,10 @@
                                     }
                                 ],
                                 "env": [
+                                    {
+                                            "name": "APPLICATION_NAME",
+                                            "value": "${APPLICATION_NAME}"
+                                    },
                                     {
                                             "name": "HOMEROOM_TITLE",
                                             "value": "${HOMEROOM_TITLE}"
@@ -220,7 +223,8 @@
             "metadata": {
                 "name": "${APPLICATION_NAME}",
                 "annotations": {
-                    "kubernetes.io/tls-acme": "${LETS_ENCRYPT}"
+                    "kubernetes.io/tls-acme": "${LETS_ENCRYPT}",
+                    "homeroom/index": "${APPLICATION_NAME}"
                 },
                 "labels": {
                     "app": "${APPLICATION_NAME}"

@@ -86,5 +86,5 @@ Deleting the deployment
 To delete the deployment, run:
 
 ```
-oc delete all,configmap -l app=homeroom
+oc delete all,configmap,serviceaccount,rolebindings -l app=homeroom
 ```

@@ -42,21 +42,27 @@
     </nav>
 
     <div class="container">
-      {% for row in workshops | batch(3) %}
-        <div class="row justify-content-center">
-          <div class="card-deck">
-            {% for workshop in row %}
-              <div class="card mb-4">
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">{{ workshop.title }}</h5>
-                    <p class="card-text">{{ workshop.description }}</p>
-                    <a href="{{ workshop.url }}" class="btn btn-primary mt-auto start-workshop">Start workshop</a>
-                </div>
+      {% if workshops %}
+          {% for row in workshops | batch(3) %}
+            <div class="row justify-content-center">
+              <div class="card-deck">
+                {% for workshop in row %}
+                  <div class="card mb-4">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ workshop.title }}</h5>
+                        <p class="card-text">{{ workshop.description }}</p>
+                        <a href="{{ workshop.url }}" class="btn btn-primary mt-auto start-workshop">Start workshop</a>
+                    </div>
+                  </div>
+                {% endfor %}
               </div>
-            {% endfor %}
+            </div>
+          {% endfor %}
+       {% else %}
+          <div class="row justify-content-center">
+              <p>No workshops available...</p>
           </div>
-        </div>
-      {% endfor %}
+       {% endif %}
     </div>
 
     <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}" crossorigin="anonymous"></script>
