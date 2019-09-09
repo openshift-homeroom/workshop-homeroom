@@ -1,9 +1,19 @@
 <!doctype html>
 <html lang="en">
   <head>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Site browser icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ config.base_url }}/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ config.base_url }}/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ config.base_url }}/favicon-16x16.png">
+    <link rel="manifest" href="{{ config.base_url }}/site.webmanifest">
+    <link rel="mask-icon" href="{{ config.base_url }}/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" crossorigin="anonymous">
@@ -14,7 +24,15 @@
 
     <style>
       body > .container {
-	padding-top: 20px;
+        padding-top: 20px;
+      }
+
+      .navbar {
+        height: 50px;
+      }
+
+      .navbar img {
+        max-height: 100%;
       }
     </style>
 
@@ -24,21 +42,27 @@
     </nav>
 
     <div class="container">
-      {% for row in workshops | batch(3) %}
-        <div class="row justify-content-center">
-          <div class="card-deck">
-            {% for workshop in row %}
-              <div class="card mb-4">
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">{{ workshop.title }}</h5>
-                    <p class="card-text">{{ workshop.description }}</p>
-                    <a href="{{ workshop.url }}" class="btn btn-primary mt-auto start-workshop">Start workshop</a>
-                </div>
+      {% if workshops %}
+          {% for row in workshops | batch(3) %}
+            <div class="row justify-content-center">
+              <div class="card-deck">
+                {% for workshop in row %}
+                  <div class="card mb-4">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ workshop.title }}</h5>
+                        <p class="card-text">{{ workshop.description }}</p>
+                        <a href="{{ workshop.url }}" class="btn btn-primary mt-auto start-workshop">Start workshop</a>
+                    </div>
+                  </div>
+                {% endfor %}
               </div>
-            {% endfor %}
+            </div>
+          {% endfor %}
+       {% else %}
+          <div class="row justify-content-center">
+              <p>No workshops available...</p>
           </div>
-        </div>
-      {% endfor %}
+       {% endif %}
     </div>
 
     <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}" crossorigin="anonymous"></script>

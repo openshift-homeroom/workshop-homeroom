@@ -15,8 +15,7 @@
         },
         {
             "name": "WORKSHOPS_LIST",
-            "value": "[]",
-            "required": true
+            "value": "[]"
         },
         {
             "name": "HOMEROOM_HOST",
@@ -28,7 +27,7 @@
         },
         {
             "name": "HOMEROOM_BRANDING",
-            "value": "openshift"
+            "value": "homeroom"
         },
         {
             "name": "LETS_ENCRYPT",
@@ -37,6 +36,35 @@
         }
     ],
     "objects": [
+        {
+            "kind": "ServiceAccount",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "${APPLICATION_NAME}-user",
+                "labels": {
+                    "app": "${APPLICATION_NAME}"
+                }
+            }
+        },
+        {
+            "kind": "RoleBinding",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "${APPLICATION_NAME}-view",
+                "labels": {
+                    "app": "${APPLICATION_NAME}"
+                }
+            },
+            "subjects": [
+                {
+                    "kind": "ServiceAccount",
+                    "name": "${APPLICATION_NAME}-user"
+                }
+            ],
+            "roleRef": {
+                "name": "view"
+            }
+        },
         {
             "kind": "ConfigMap",
             "apiVersion": "v1",
@@ -149,6 +177,7 @@
                         }
                     },
                     "spec": {
+                        "serviceAccountName": "${APPLICATION_NAME}-user",
                         "containers": [
                             {
                                 "name": "homeroom",
@@ -159,6 +188,10 @@
                                     }
                                 ],
                                 "env": [
+                                    {
+                                            "name": "APPLICATION_NAME",
+                                            "value": "${APPLICATION_NAME}"
+                                    },
                                     {
                                             "name": "HOMEROOM_TITLE",
                                             "value": "${HOMEROOM_TITLE}"
@@ -219,7 +252,8 @@
             "metadata": {
                 "name": "${APPLICATION_NAME}",
                 "annotations": {
-                    "kubernetes.io/tls-acme": "${LETS_ENCRYPT}"
+                    "kubernetes.io/tls-acme": "${LETS_ENCRYPT}",
+                    "homeroom/index": "${APPLICATION_NAME}"
                 },
                 "labels": {
                     "app": "${APPLICATION_NAME}"
