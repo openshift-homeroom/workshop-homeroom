@@ -9,7 +9,7 @@ vars:
   objref:
     apiVersion: v1
     kind: ConfigMap
-    name: settings
+    name: homeroom-environ
   fieldref:
     fieldPath: data.APPLICATION_NAME
 
