@@ -9,5 +9,5 @@ spec:
       paths:
       - path: "/"
         backend:
-          serviceName: spawner
+          serviceName: homeroom
           servicePort: 8080
