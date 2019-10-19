@@ -7,8 +7,6 @@ spec:
   selector:
     matchLabels:
       deployment: homeroom
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
