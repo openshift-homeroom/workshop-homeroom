@@ -38,7 +38,7 @@ route_resource = api_client.resources.get(
 
 workshops = []
 
-application_name = os.environ.get('APPLICATION_NAME')
+application_name = os.environ.get('APPLICATION_NAME', 'homeroom')
 
 def filter_out_hidden(workshops):
     for workshop in workshops:
