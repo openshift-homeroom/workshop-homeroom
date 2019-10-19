@@ -33,8 +33,14 @@ Configuration.set_default(instance)
 
 api_client = DynamicClient(ApiClient())
 
-route_resource = api_client.resources.get(
-        api_version='route.openshift.io/v1', kind='Route')
+try:
+    route_resource = api_client.resources.get(
+         api_version='route.openshift.io/v1', kind='Route')
+except ResourceNotFoundError:
+    route_resource = None
+
+ingress_resource = api_client.resources.get(
+     api_version='extensions/v1beta1', kind='Ingress')
 
 # Setup loading or workshops or live monitor.
 
@@ -47,16 +53,6 @@ def filter_out_hidden(workshops):
         if workshop.get('visibility', 'visible') != 'hidden':
             yield workshop
 
-def lookup_route_host(name):
-    route = route_resource.get(namespace=namespace, name=name)
-
-    scheme = 'http'
-
-    if route.tls and route.tls.termination:
-        scheme = 'https'
-
-    return '%s://%s' % (scheme, route.spec.host)
-
 def monitor_workshops():
     global workshops
 
@@ -64,7 +60,10 @@ def monitor_workshops():
         active_workshops = []
 
         try:
-            routes = route_resource.get(namespace=namespace)
+            if route_resource is not None:
+                routes = route_resource.get(namespace=namespace)
+            else:
+                routes = ingress_resource.get(namespace=namespace)
 
             for route in routes.items:
                 annotations = route.metadata.annotations
@@ -75,10 +74,17 @@ def monitor_workshops():
                         description = annotations.get('homeroom/description') or ''
 
                         scheme = 'http'
-                        if route.tls and route.tls.termination:
-                            scheme = 'https'
 
-                        url = '%s://%s' % (scheme, route.spec.host)
+                        if route_resource is not None:
+                            if route.tls and route.tls.termination:
+                                scheme = 'https'
+
+                            url = '%s://%s' % (scheme, route.spec.host)
+                        else:
+                            if route.tls:
+                                scheme = 'https'
+
+                            url = '%s://%s' % (scheme, route.spec.rules[0].host)
 
                         active_workshops.append(dict(title=title,
                                 description=description, url=url))
