@@ -4,7 +4,7 @@ metadata:
   name: homeroom
 spec:
   rules:
-  - host: $(APPLICATION_NAME).$(CLUSTER_SUBDOMAIN)
+  - host: homeroom.$(CLUSTER_SUBDOMAIN)
     http:
       paths:
       - path: "/"
