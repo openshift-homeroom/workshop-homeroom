@@ -17,7 +17,7 @@ spec:
       serviceAccountName: homeroom
       containers:
       - name: spawner
-        image: quay.io/openshifthomeroom/workshop-spawner:latest
+        image: quay.io/openshifthomeroom/workshop-homeroom:latest
         envFrom:
         - configMapRef:
             name: homeroom-environ
