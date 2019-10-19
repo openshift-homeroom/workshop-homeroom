@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: homeroom
   annotations:
-    homeroom/index: $(HOMEROOM_NAME)
+    homeroom/index: homeroom
 spec:
 rules:
 - host: homeroom.$(CLUSTER_SUBDOMAIN)
