@@ -3,13 +3,13 @@ kind: Ingress
 metadata:
   name: homeroom
   annotations:
-    homeroom/index: homeroom
+    homeroom/index: $(HOMEROOM_NAME)
 spec:
-rules:
-- host: homeroom.$(CLUSTER_SUBDOMAIN)
-http:
-paths:
-- path: "/"
-backend:
-serviceName: homeroom
-servicePort: 8080
+  rules:
+  - host: homeroom.$(CLUSTER_SUBDOMAIN)
+    http:
+      paths:
+      - path: "/"
+        backend:
+          serviceName: homeroom
+          servicePort: 8080
