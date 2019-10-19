@@ -27,8 +27,6 @@ spec:
         volumeMounts:
         - mountPath: /opt/app-root/configs
           name: configs
-        - mountPath: /opt/app-root/resources
-          name: resources
       volumes:
       - name: configs
         configMap:
