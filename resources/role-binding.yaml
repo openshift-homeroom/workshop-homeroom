@@ -1,0 +1,9 @@
+apiVersion: authorization.openshift.io/v1
+kind: RoleBinding
+metadata:
+  name: homeroom-view
+subjects:
+- kind: ServiceAccount
+  name: homeroom-user
+roleRef:
+  name: view

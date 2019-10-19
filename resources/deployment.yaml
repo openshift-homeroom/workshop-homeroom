@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homeroom
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment: homeroom
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        deployment: homeroom
+    spec:
+      serviceAccountName: homeroom
+      containers:
+      - name: spawner
+        image: quay.io/openshifthomeroom/workshop-spawner:latest
+        envFrom:
+        - configMapRef:
+            name: homeroom-environ
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /opt/app-root/configs
+          name: configs
+        - mountPath: /opt/app-root/resources
+          name: resources
+      volumes:
+      - name: configs
+        configMap:
+          defaultMode: 420
+          name: homeroom-configs

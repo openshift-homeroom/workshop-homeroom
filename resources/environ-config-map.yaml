@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homeroom-environ
+data:
+  APPLICATION_NAME: homeroom
+  HOMEROOM_TITLE: Workshops
+  HOMEROOM_BRANDING: homeroom

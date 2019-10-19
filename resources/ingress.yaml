@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: homeroom
+spec:
+  rules:
+  - host: $(APPLICATION_NAME).$(CLUSTER_SUBDOMAIN)
+    http:
+      paths:
+      - path: "/"
+        backend:
+          serviceName: spawner
+          servicePort: 8080
