@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: homeroom-configs
 data:
-  workshops.json: '[]'
+  workshops.yaml: '[]'

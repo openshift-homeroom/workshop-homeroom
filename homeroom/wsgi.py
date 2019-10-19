@@ -3,6 +3,8 @@ import json
 import threading
 import time
 
+import yaml
+
 from flask import Flask
 from flask import render_template
 
@@ -92,6 +94,10 @@ def monitor_workshops():
             print('ERROR: Error looking up routes. %s' % e)
 
         time.sleep(15)
+
+if os.path.exists('/opt/app-root/configs/workshops.yaml'):
+    with open('/opt/app-root/configs/workshops.yaml') as fp:
+        workshops = list(filter_out_hidden(yaml.safe_load(fp)))
 
 if os.path.exists('/opt/app-root/configs/workshops.json'):
     with open('/opt/app-root/configs/workshops.json') as fp:
