@@ -4,6 +4,15 @@ kind: Kustomization
 commonLabels:
   app: homeroom
 
+vars:
+- name: HOMEROOM_NAME
+  objref:
+    apiVersion: v1
+    kind: ConfigMap
+    name: homeroom-environ
+  fieldref:
+    fieldPath: data.APPLICATION_NAME
+
 resources:
 - resources/service-account.yaml
 - resources/role-binding.yaml
