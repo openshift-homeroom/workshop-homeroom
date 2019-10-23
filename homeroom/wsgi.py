@@ -82,11 +82,11 @@ def monitor_workshops():
                             active_workshops.append(dict(title=title,
                                     description=description, url=url))
 
-                except ApiException as e:
-                    print('ERROR: Error looking up routes. %s' % e)
+            except ApiException as e:
+                print('ERROR: Error looking up routes. %s' % e)
 
-                except Exception as e:
-                    print('ERROR: Error looking up routes. %s' % e)
+            except Exception as e:
+                print('ERROR: Error looking up routes. %s' % e)
 
         try:
             ingresses = ingress_resource.get(namespace=namespace)
