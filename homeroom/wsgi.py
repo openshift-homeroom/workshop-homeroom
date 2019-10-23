@@ -60,55 +60,77 @@ def monitor_workshops():
     while True:
         active_workshops = []
 
-        try:
-            if route_resource is not None:
+        if route_resource is not None:
+            try:
                 routes = route_resource.get(namespace=namespace)
-            else:
-                routes = ingress_resource.get(namespace=namespace)
 
-            for route in routes.items:
+                for route in routes.items:
+                    annotations = route.metadata.annotations
+                    if annotations:
+                        if annotations.get('homeroom/group') == application_name:
+                            name = route.metadata.name
+                            title = annotations.get('homeroom/title') or name
+                            description = annotations.get('homeroom/description') or ''
+
+                            scheme = 'http'
+
+                            if route.tls and route.tls.termination:
+                                scheme = 'https'
+
+                            url = '%s://%s' % (scheme, route.spec.host)
+
+                            active_workshops.append(dict(title=title,
+                                    description=description, url=url))
+
+                except ApiException as e:
+                    print('ERROR: Error looking up routes. %s' % e)
+
+                except Exception as e:
+                    print('ERROR: Error looking up routes. %s' % e)
+
+        try:
+            ingresses = ingress_resource.get(namespace=namespace)
+
+            for ingress in ingresses.items:
                 annotations = route.metadata.annotations
                 if annotations:
                     if annotations.get('homeroom/group') == application_name:
-                        name = route.metadata.name
+                        name = ingress.metadata.name
                         title = annotations.get('homeroom/title') or name
                         description = annotations.get('homeroom/description') or ''
 
                         scheme = 'http'
 
-                        if route_resource is not None:
-                            if route.tls and route.tls.termination:
-                                scheme = 'https'
+                        if ingress.tls:
+                            scheme = 'https'
 
-                            url = '%s://%s' % (scheme, route.spec.host)
-                        else:
-                            if route.tls:
-                                scheme = 'https'
-
-                            url = '%s://%s' % (scheme, route.spec.rules[0].host)
+                        url = '%s://%s' % (scheme, ingress.spec.rules[0].host)
 
                         active_workshops.append(dict(title=title,
                                 description=description, url=url))
 
-            if workshops != active_workshops:
-                workshops[:] = active_workshops
-                print('WORKSHOPS', workshops)
-
         except ApiException as e:
-            print('ERROR: Error looking up routes. %s' % e)
+            print('ERROR: Error looking up ingress. %s' % e)
 
         except Exception as e:
-            print('ERROR: Error looking up routes. %s' % e)
+            print('ERROR: Error looking up ingress. %s' % e)
+
+        if workshops != active_workshops:
+            workshops[:] = active_workshops
+            print('WORKSHOPS', workshops)
 
         time.sleep(15)
 
 if os.path.exists('/opt/app-root/configs/workshops.yaml'):
     with open('/opt/app-root/configs/workshops.yaml') as fp:
-        workshops = list(filter_out_hidden(yaml.safe_load(fp)))
+        content = fp.read()
+        if content:
+            workshops = list(filter_out_hidden(yaml.safe_load(content)))
 
 if os.path.exists('/opt/app-root/configs/workshops.json'):
     with open('/opt/app-root/configs/workshops.json') as fp:
-        workshops = list(filter_out_hidden(json.load(fp)))
+        content = fp.read()
+        workshops = list(filter_out_hidden(json.loads(content)))
 
 if not workshops:
     monitor_thread = threading.Thread(target=monitor_workshops)
