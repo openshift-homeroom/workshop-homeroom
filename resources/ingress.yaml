@@ -6,7 +6,7 @@ metadata:
     homeroom/index: homeroom
 spec:
   rules:
-  - host: homeroom.$(CLUSTER_SUBDOMAIN)
+  - host: "homeroom.${CLUSTER_SUBDOMAIN}"
     http:
       paths:
       - path: "/"
